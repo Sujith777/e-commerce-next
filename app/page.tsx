@@ -2,6 +2,8 @@ import ProductCard from "@/components/ProductCard";
 import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "./(root)/Navbar/Navbar";
+import Footer from "./(root)/Footer/Footer";
 
 export default async function Home() {
   const products = await prisma.product.findMany({
@@ -10,6 +12,7 @@ export default async function Home() {
 
   return (
     <div>
+      <Navbar />
       <div className="hero rounded-xl bg-base-100">
         <div className="hero-content flex-col lg:flex-row">
           <Image
@@ -37,6 +40,7 @@ export default async function Home() {
           <ProductCard product={product} key={product?.id} />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

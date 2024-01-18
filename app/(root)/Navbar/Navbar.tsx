@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/app/assets/logo.png";
-import { prisma } from "@/lib/db/prisma";
 import { redirect } from "next/navigation";
 import { getCart } from "@/lib/db/cart";
 import ShoppingCartButton from "./ShoppingCartButton";
+import UserMenuButton from "./UserMenuButton";
+import { auth } from "@/auth";
 
 async function searchProducts(formData: FormData) {
   "use server";
@@ -17,6 +18,7 @@ async function searchProducts(formData: FormData) {
 
 const Navbar = async () => {
   const cart = await getCart();
+  const session = await auth();
 
   return (
     <div className="bg-base-100">
@@ -39,6 +41,7 @@ const Navbar = async () => {
             </div>
           </form>
           <ShoppingCartButton cart={cart} />
+          <UserMenuButton session={session} />
         </div>
       </div>
     </div>
