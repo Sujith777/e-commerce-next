@@ -1,6 +1,6 @@
 import { getCart } from "@/lib/db/cart";
 import CartEntry from "./CartEntry";
-import { setProductQuantity } from "./actions";
+import { setProductQuantity } from "@/actions/cart-actions";
 import { formatPrice } from "@/lib/format";
 
 export const metadata = {

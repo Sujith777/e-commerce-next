@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { Session } from "next-auth";
 import profilePlaceholder from "@/app/assets/profile-pic-placeholder.png";
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 interface UserMenuButtonProps {
   session: Session | null;
@@ -49,7 +50,7 @@ const UserMenuButton = ({ session }: UserMenuButtonProps) => {
               Sign Out
             </button>
           ) : (
-            <button onClick={() => signIn("google")}>Sign In</button>
+            <Link href={"/auth/login"}>Sign In</Link>
           )}
         </li>
       </ul>

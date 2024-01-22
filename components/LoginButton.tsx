@@ -1,28 +1,26 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useTransition } from "react";
 
 interface LoginButtonProps {
   children: React.ReactNode;
   mode?: "modal" | "redirect";
   asChild?: boolean;
+  className?: string;
 }
 
 const LoginButton = ({
   children,
   mode = "redirect",
   asChild,
+  className,
 }: LoginButtonProps) => {
-  const router = useRouter();
-  const handleClick = () => {
-    router.push("/auth/login");
-  };
+  const [isPending, startTransition] = useTransition();
 
   return (
-    <span onClick={handleClick} className="cursor-pointer">
+    <button type="submit" disabled={isPending} className={className}>
       {children}
-    </span>
+    </button>
   );
 };
 

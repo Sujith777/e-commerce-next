@@ -1,11 +1,11 @@
-import Image from "next/image";
+import { auth } from "@/auth";
 import Link from "next/link";
+import Image from "next/image";
+import { getCart } from "@/lib/db/cart";
 import logo from "@/app/assets/logo.png";
 import { redirect } from "next/navigation";
-import { getCart } from "@/lib/db/cart";
 import ShoppingCartButton from "./ShoppingCartButton";
 import UserMenuButton from "./UserMenuButton";
-import { auth } from "@/auth";
 
 async function searchProducts(formData: FormData) {
   "use server";

@@ -2,16 +2,17 @@
 
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { Button } from "./ui/button";
 
 const Social = () => {
   return (
-    <div className="flex py-4 items-center gap-4 flex-col justify-center">
-      <button onClick={() => {}} className="btn w-full">
-        <FaGithub className="h-8 w-8" />
-      </button>
-      <button onClick={() => {}} className="btn w-full">
-        <FcGoogle className="h-8 w-8" />
-      </button>
+    <div className="flex w-full items-center gap-x-2">
+      <Button onClick={() => {}} className="w-full" size="lg">
+        <FaGithub className="h-5 w-5" />
+      </Button>
+      <Button onClick={() => {}} className="w-full" size="lg">
+        <FcGoogle className="h-5 w-5" />
+      </Button>
     </div>
   );
 };
