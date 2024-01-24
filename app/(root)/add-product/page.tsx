@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import SubmitButton from "@/components/SubmitButton";
 import { prisma } from "@/lib/db/prisma";
 import { redirect } from "next/navigation";
@@ -25,7 +26,14 @@ async function addProduct(formData: FormData) {
   redirect("/");
 }
 
-export default function AddProduct() {
+export default async function AddProduct() {
+  const session = await auth();
+  const user = session?.user;
+
+  if (!user || user.role !== "ADMIN") {
+    redirect("/add-product/error");
+  }
+
   return (
     <div className="w-1/2 flex flex-col gap-8 m-auto">
       <h1 className="text-lg mb-3 font-bold">Add Product</h1>
