@@ -47,6 +47,7 @@ export async function login(values: z.infer<typeof LoginSchema>) {
     }
     throw error;
   }
+  return { success: "Login successful" };
 }
 
 export async function register(values: z.infer<typeof RegisterSchema>) {
