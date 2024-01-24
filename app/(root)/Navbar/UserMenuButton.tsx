@@ -5,6 +5,7 @@ import { Session } from "next-auth";
 import profilePlaceholder from "@/app/assets/profile-pic-placeholder.png";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface UserMenuButtonProps {
   session: Session | null;
@@ -46,9 +47,15 @@ const UserMenuButton = ({ session }: UserMenuButtonProps) => {
       >
         <li>
           {user ? (
-            <button onClick={() => signOut({ callbackUrl: "/" })}>
-              Sign Out
-            </button>
+            <>
+              <p className="text-lg text-primary font-semibold">{user?.name}</p>
+              <Button
+                className="btn-outline m-4"
+                onClick={() => signOut({ callbackUrl: "/" })}
+              >
+                Sign Out
+              </Button>
+            </>
           ) : (
             <Link href={"/auth/login"}>Sign In</Link>
           )}

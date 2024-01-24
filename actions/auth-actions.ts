@@ -8,6 +8,7 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 import { getUserByEmail } from "./user-actions";
 import { prisma } from "@/lib/db/prisma";
+import { generateVerificationToken } from "@/lib/tokens";
 
 export async function login(values: z.infer<typeof LoginSchema>) {
   const validatedFields = LoginSchema.safeParse(values);
@@ -15,6 +16,19 @@ export async function login(values: z.infer<typeof LoginSchema>) {
     return { error: "Invalid fields" };
   }
   const { email, password } = validatedFields.data;
+
+  // This can be used to prevent users without email verification from logging in
+  // const existingUser = await getUserByEmail(email);
+  // if (!existingUser || !existingUser.email || !existingUser.password) {
+  //   return { error: "Email does not exist" };
+  // }
+
+  // if (!existingUser.emailVerified) {
+  //   const verificationToken = await generateVerificationToken(
+  //     existingUser.email
+  //   );
+  //   return { success: "Confirmation Email sent" };
+  // }
 
   try {
     await signIn("credentials", {

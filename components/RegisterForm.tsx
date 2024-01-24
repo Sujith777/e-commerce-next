@@ -18,7 +18,8 @@ import FormError from "@/components/FormError";
 import FormSuccess from "@/components/FormSuccess";
 import { Button } from "@/components/ui/button";
 import * as z from "zod";
-import { register } from "@/actions/auth-actions";
+import { login, register } from "@/actions/auth-actions";
+import { redirect } from "next/navigation";
 
 export default function RegisterPage() {
   const [isPending, startTransition] = useTransition();
@@ -42,6 +43,8 @@ export default function RegisterPage() {
         setError(data?.error);
         setSuccess(data?.success);
       });
+      // login({ email: values.email, password: values.password });
+      // redirect("/");
     });
   }
 
