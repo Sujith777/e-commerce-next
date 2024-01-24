@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db/prisma";
 import { UserRole } from "@prisma/client";
 import authConfig from "@/auth.config";
 import { getUserById } from "./actions/user-actions";
+import { mergeAnonymousCartIntoUserCart } from "./lib/db/cart";
 
 export const {
   handlers: { GET, POST },
@@ -24,16 +25,17 @@ export const {
     },
   },
   callbacks: {
-    // This can be used to prevent users without email verification from logging in
-    // async signIn({ user, account }) {
-    //   if (account?.provider !== "credentials") return true;
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") return true;
 
-    //   const existingUser = await getUserById(user?.id || "");
-    //   if (!existingUser || !existingUser?.emailVerified) {
-    //     return false;
-    //   }
-    //   return true;
-    // },
+      if (!user.id) return false;
+      const existingUser = await getUserById(user.id);
+      if (!existingUser) {
+        return false;
+      }
+      await mergeAnonymousCartIntoUserCart(user?.id);
+      return true;
+    },
 
     async session({ session, token }: { session: Session; token?: any }) {
       if (token.sub && session.user) {
