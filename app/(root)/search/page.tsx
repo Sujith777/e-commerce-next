@@ -1,10 +1,19 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { prisma } from "@/lib/db/prisma";
 import ProductCard from "@/components/ProductCard";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon, ExitIcon } from "@radix-ui/react-icons";
 
 interface SearchPageProps {
   searchParams: { query: string };
+}
+
+export function generateMetadata({
+  searchParams: { query },
+}: SearchPageProps): Metadata {
+  return {
+    title: `Search: ${query} - Flowmazon`,
+  };
 }
 
 export default async function SearchPage({
@@ -33,8 +42,8 @@ export default async function SearchPage({
             searching for another product.
           </p>
           <div className="card-actions justify-end">
-            <Link href={"/"} className="btn btn-primary">
-              Go Back
+            <Link href={"/"} className="btn btn-ghost font-semibold">
+              <ExitIcon /> Go Back
             </Link>
           </div>
         </div>

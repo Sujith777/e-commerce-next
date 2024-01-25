@@ -94,7 +94,7 @@ function LoginForm() {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            Login
+            {isPending && <span className="loading loading-spinner" />} Login
           </Button>
         </form>
       </Form>

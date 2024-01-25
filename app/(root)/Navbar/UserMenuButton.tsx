@@ -6,6 +6,7 @@ import profilePlaceholder from "@/app/assets/profile-pic-placeholder.png";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ExitIcon, AvatarIcon } from "@radix-ui/react-icons";
 
 interface UserMenuButtonProps {
   session: Session | null;
@@ -54,10 +55,14 @@ const UserMenuButton = ({ session }: UserMenuButtonProps) => {
                 onClick={() => signOut({ callbackUrl: "/" })}
               >
                 Sign Out
+                <ExitIcon />
               </Button>
             </>
           ) : (
-            <Link href={"/auth/login"}>Sign In</Link>
+            <Link href={"/auth/login"}>
+              <AvatarIcon className="h-5 w-5" />
+              Sign In
+            </Link>
           )}
         </li>
       </ul>

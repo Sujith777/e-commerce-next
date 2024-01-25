@@ -43,8 +43,8 @@ export default function RegisterPage() {
         setError(data?.error);
         setSuccess(data?.success);
       });
-      // login({ email: values.email, password: values.password });
-      // redirect("/");
+      login({ email: values.email, password: values.password });
+      redirect("/");
     });
   }
 
@@ -103,7 +103,7 @@ export default function RegisterPage() {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            Register
+            {isPending && <span className="loading loading-spinner" />} Register
           </Button>
         </form>
       </Form>

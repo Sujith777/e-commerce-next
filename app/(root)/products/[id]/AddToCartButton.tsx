@@ -15,7 +15,7 @@ const AddToCartButton = ({ productId }: AddToCartButtonProps) => {
   return (
     <div className="items-center flex gap-2">
       <button
-        className="btn btn-primary"
+        className="btn btn-outline"
         onClick={() => {
           setSuccess(false);
           startTransition(async () => {

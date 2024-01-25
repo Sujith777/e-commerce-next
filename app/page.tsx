@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "./(root)/Navbar/Navbar";
 import Footer from "./(root)/Footer/Footer";
 import PaginationBar from "@/components/PaginationBar";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
 interface HomeProps {
   searchParams: { page: string };
@@ -47,9 +48,10 @@ export default async function Home({
                 <p className="py-6">{products[0].description}</p>
                 <Link
                   href={`/products/${products[0].id}`}
-                  className="btn-primary btn"
+                  className="btn-outline btn"
                 >
                   Check it out
+                  <ArrowTopRightIcon />
                 </Link>
               </div>
             </div>

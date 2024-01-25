@@ -42,13 +42,13 @@ const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
       >
         <div className="card-body">
           <span className="text-lg font-bold">{cart?.size || 0}</span>
-          <span className="text-info">
+          <span className="text-success">
             Subtotal: {formatPrice(cart?.subtotal || 0)}
           </span>
           <div className="cart-actions">
             <Link
               href={"/cart"}
-              className="btn btn-primary btn-black"
+              className="btn btn-outline"
               onClick={closeDropdown}
             >
               View Cart
