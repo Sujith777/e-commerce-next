@@ -1,7 +1,8 @@
 import NextAuth, { Session } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client/edge";
 import { prisma } from "@/lib/db/prisma";
-import { PrismaClient, UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
 import authConfig from "@/auth.config";
 import { getUserById } from "./actions/user-actions";
 import { mergeAnonymousCartIntoUserCart } from "./lib/db/cart";
@@ -54,7 +55,7 @@ export const {
       return token;
     },
   },
-  adapter: PrismaAdapter(prisma as PrismaClient),
+  adapter: PrismaAdapter(prisma as unknown as PrismaClient),
   session: { strategy: "jwt" },
   ...authConfig,
 });
